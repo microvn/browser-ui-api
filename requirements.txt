@@ -1,6 +1,5 @@
 browser-use
 python-dotenv
 langchain_google_genai
-Flask==2.0.1
-Werkzeug==2.2.2
+quart
 pydantic
