@@ -1,4 +1,3 @@
-# app.py
 from flask import Flask, jsonify, request
 from langchain_google_genai import ChatGoogleGenerativeAI
 from pydantic import SecretStr
@@ -35,10 +34,9 @@ def compare_prices():
         result = await agent.run()
         return result
 
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    result = loop.run_until_complete(run_agent())
+    # Sử dụng asyncio.run() để chạy coroutine
+    result = asyncio.run(run_agent())
     return jsonify(result.model_dump())
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5001)
