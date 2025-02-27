@@ -26,7 +26,7 @@ def compare_prices():
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
     result = loop.run_until_complete(run_agent())
-    return jsonify(result)
+    return jsonify(result.model_dump())
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
