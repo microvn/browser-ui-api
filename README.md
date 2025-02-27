@@ -21,6 +21,7 @@ services:
     volumes:
       - .:/app
     ports:
+      - '5000:5000'
       - '5900:5900'
     extra_hosts:
       - 'host.docker.internal:host-gateway'
