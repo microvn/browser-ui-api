@@ -13,7 +13,11 @@ x11vnc -display :99 \
        -passwd secret \
        -shared &
 
-exec tail -f /dev/null
+# Remove
+#exec tail -f /dev/null
+
+# Wait for VNC to be ready (optional)
+sleep 2
 
 # Run the Python application
 exec python main.py
