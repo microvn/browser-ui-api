@@ -1,13 +1,20 @@
 # app.py
 from flask import Flask, jsonify, request
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
+from pydantic import SecretStr
 from browser_use import Agent
 import asyncio
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
 
 app = Flask(__name__)
+
+api_key = SecretStr(os.getenv("GEMINI_API_KEY"))
+
+# Initialize the model
+llm = ChatGoogleGenerativeAI(model='gemini-2.0-flash-exp', api_key=api_key)
 
 @app.route('/browser-ui', methods=['POST'])
 def compare_prices():
@@ -18,7 +25,7 @@ def compare_prices():
     async def run_agent():
         agent = Agent(
             task=task,
-            llm=ChatOpenAI(model="gpt-4o"),
+            llm=llm,
         )
         result = await agent.run()
         return result
