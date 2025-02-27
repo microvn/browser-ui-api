@@ -16,6 +16,11 @@ api_key = SecretStr(os.getenv("GEMINI_API_KEY"))
 # Initialize the model
 llm = ChatGoogleGenerativeAI(model='gemini-2.0-flash-exp', api_key=api_key)
 
+def convert_to_dict(agent_history_list):
+    return {
+        'all_results': agent_history_list,
+    }
+
 @app.route('/browser-ui', methods=['POST'])
 def compare_prices():
     # Get the task from the JSON body
@@ -33,7 +38,7 @@ def compare_prices():
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
     result = loop.run_until_complete(run_agent())
-    return jsonify(result)
+    return jsonify(result.model_dump())
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5001)
