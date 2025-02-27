@@ -1,0 +1,13 @@
+services:
+  browser-use-api:
+    build: .
+    container_name: browser-use-api
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    ports:
+      - '5000:5000'
+      - '5900:5900'
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
