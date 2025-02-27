@@ -13,7 +13,7 @@ x11vnc -display :99 \
        -passwd secret \
        -shared &
 
-# Remove
+# Remove exec
 #exec tail -f /dev/null
 
 # Wait for VNC to be ready (optional)
